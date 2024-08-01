@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import { router } from './routes/UrlShortening.routes';
+import { router } from './routes/UrlShorteningRoutes';
 
 dotenv.config();
 
