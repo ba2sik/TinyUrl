@@ -2,6 +2,16 @@ import { Request, Response } from 'express';
 import { generateShortUrl } from '../utils/shortener';
 
 export const UrlShorteningController = {
+  getUrl: (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      res.json({
+        id,
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Server error' });
+    }
+  },
   shortenUrl: (req: Request, res: Response) => {
     try {
       const shortUrl = generateShortUrl('hello');

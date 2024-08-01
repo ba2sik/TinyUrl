@@ -1,7 +1,9 @@
 import { createHash } from 'crypto';
 
 export const generateShortUrl = (url: string): string => {
-  return generateUniqueId(url);
+  const id = generateUniqueId(url);
+
+  return `http://localhost:3000/${id}`;
 };
 
 export const generateUniqueId = (str: string, length = 8): string => {
