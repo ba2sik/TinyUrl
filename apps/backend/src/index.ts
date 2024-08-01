@@ -4,13 +4,13 @@ import { router } from './routes/UrlShorteningRoutes';
 import cors from 'cors';
 import { connectDB } from './configs/dbConfig';
 
-export const PORT = process.env.PORT || 3000;
-
 dotenv.config();
 
-const app: Express = express();
+export const PORT = process.env.PORT || 3000;
 
 connectDB();
+
+const app: Express = express();
 
 app.use(cors());
 

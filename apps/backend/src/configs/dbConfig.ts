@@ -1,4 +1,5 @@
 import { Db, MongoClient, ServerApiVersion } from 'mongodb';
+import { ShortUrlItem } from '../types/shortUrlItem';
 
 // const uri = process.env.MONGO_URI as string;
 const uri =
@@ -25,3 +26,6 @@ export const connectDB = async (): Promise<Db> => {
     process.exit(1);
   }
 };
+
+const db = client.db('tinyUrlDb');
+export const shortUrlsCollection = db.collection<ShortUrlItem>('shortUrls');
