@@ -3,9 +3,12 @@ import { ShortenUrlForm } from '../../components/ShortenUrlForm/ShortenUrlForm';
 import { SubmitHandler } from 'react-hook-form';
 import { ShortenUrlPayload } from '../../components/ShortenUrlForm/types/shorten-url-payload-schema';
 import { useShortUrl } from '../../hooks/useShortUrl';
+import { ErrorMessage } from '../../components';
+import { isNotNullOrUndefined } from '../../utils';
 
 const Home: React.FC = () => {
   const [shortUrl, setShortUrl] = React.useState<string | null>(null);
+  const [error, setError] = React.useState<unknown>(null);
   const { mutateAsync: getShortUrl } = useShortUrl();
 
   const onShortenClick: SubmitHandler<ShortenUrlPayload> = async ({ url }) => {
@@ -14,7 +17,7 @@ const Home: React.FC = () => {
 
       setShortUrl(shortUrl);
     } catch (error) {
-      alert('An error occurred');
+      setError(error);
     }
   };
 
@@ -36,6 +39,7 @@ const Home: React.FC = () => {
           </a>
         </div>
       )}
+      {isNotNullOrUndefined(error) && <ErrorMessage error={error} />}
     </div>
   );
 };
