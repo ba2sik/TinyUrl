@@ -1,5 +1,6 @@
 import { shortUrlsCollection } from '../configs/dbConfig';
 import { ShortUrlItem } from '../types/shortUrlItem';
+import { SERVER_ADDRESS } from '../utils/urls';
 
 export const getMostPopularDomains = async () => {
   try {
@@ -7,14 +8,14 @@ export const getMostPopularDomains = async () => {
       {
         $project: {
           domain: { $arrayElemAt: [{ $split: ['$originalUrl', '/'] }, 2] },
-          originalUrl: 1,
           clicks: 1,
+          fullUrl: { $concat: [SERVER_ADDRESS + '/api/url/', '$shortUrlId'] },
         },
       },
       {
         $group: {
           _id: '$domain',
-          urls: { $push: '$originalUrl' },
+          urls: { $push: '$fullUrl' },
           totalClicks: {
             $sum: '$clicks',
           },
