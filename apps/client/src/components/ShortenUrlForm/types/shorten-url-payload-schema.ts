@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const shortenUrlPayloadSchema = z
   .object({
-    url: z.string({ message: 'Please enter a valid URL' }),
+    url: z.string().url({ message: 'Please enter a valid URL' }),
   })
   .strict();
 

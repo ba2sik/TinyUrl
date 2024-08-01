@@ -27,7 +27,7 @@ export const ShortenUrlForm: React.FC<ShortenUrlFormProps> = ({
       <FormInput
         fieldName="url"
         errorMessage={errors.url?.message}
-        placeholder="www.example.com"
+        placeholder="http://www.example.com"
         {...register('url')}
       />
       <div className="flex justify-center">
