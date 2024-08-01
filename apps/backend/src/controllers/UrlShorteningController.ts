@@ -9,9 +9,7 @@ const popularDomains = async (req: Request, res: Response) => {
   try {
     const mostPopularDomains = await getMostPopularDomains();
 
-    res.json({
-      mostPopularDomains,
-    });
+    res.json(mostPopularDomains);
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
