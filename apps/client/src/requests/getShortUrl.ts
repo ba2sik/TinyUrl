@@ -1,12 +1,10 @@
 import axios from 'axios';
-
-export type ShortUrlSchema = {
-  shortUrl: string;
-};
+import { ShortUrlSchema } from '../schemas/short-url-schema';
+import { SERVER_URL } from '../constants/routes';
 
 export const getShortUrl = async (url: string) => {
   try {
-    const response = await axios.post<ShortUrlSchema>('http://localhost:3000/api/shorten', {
+    const response = await axios.post<ShortUrlSchema>(`${SERVER_URL}:3000/api/shorten`, {
       url,
     });
 

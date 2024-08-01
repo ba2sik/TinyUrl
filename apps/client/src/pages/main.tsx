@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ROUTES } from '../constants/routes';
 import { ErrorPage } from './error/ErrorPage';
 import { Loader } from '../components';
+import { Dashboard } from './Dashboard/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTES.ADMIN,
-    element: <div>Hello world</div>,
+    element: <Dashboard />,
     errorElement: <ErrorPage />,
   },
 ]);
