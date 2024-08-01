@@ -3,22 +3,17 @@ import { ShortenUrlForm } from '../../components/ShortenUrlForm/ShortenUrlForm';
 import { SubmitHandler } from 'react-hook-form';
 import { ShortenUrlPayload } from '../../components/ShortenUrlForm/types/shorten-url-payload-schema';
 import { useShortUrl } from '../../hooks/useShortUrl';
-import { ErrorMessage } from '../../components';
+import { ErrorMessage, Loader } from '../../components';
 import { isNotNullOrUndefined } from '../../utils';
 
 const Home: React.FC = () => {
   const [shortUrl, setShortUrl] = React.useState<string | null>(null);
-  const [error, setError] = React.useState<unknown>(null);
-  const { mutateAsync: getShortUrl } = useShortUrl();
+  const { mutateAsync: getShortUrl, error, isPending } = useShortUrl();
 
   const onShortenClick: SubmitHandler<ShortenUrlPayload> = async ({ url }) => {
-    try {
-      const shortUrl = await getShortUrl(url);
+    const shortUrl = await getShortUrl(url);
 
-      setShortUrl(shortUrl);
-    } catch (error) {
-      setError(error);
-    }
+    setShortUrl(shortUrl);
   };
 
   return (
@@ -28,6 +23,7 @@ const Home: React.FC = () => {
         onSubmit={onShortenClick}
         buttonText="Shorten"
       />
+      {isPending && <Loader />}
       {shortUrl && (
         <div className="flex flex-col gap-4 items-center">
           <h2 className="text-2xl">Shortened URL:</h2>
