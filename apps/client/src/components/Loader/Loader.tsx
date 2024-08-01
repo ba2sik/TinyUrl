@@ -8,7 +8,7 @@ export const Loader: React.FC<LoaderProps> = ({ className, ...props }) => {
   return (
     <img
       src={PokeballIcon}
-      className={twMerge('w-40 m-auto animate-bounce', className)}
+      className={twMerge('w-12 m-auto animate-bounce', className)}
       alt="Pokeball Loader"
       {...props}
     />
