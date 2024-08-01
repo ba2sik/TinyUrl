@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { generateShortUrl } from '../utils/shortener';
+import { urlSchema } from '../schemas/urlSchema';
 
 export const UrlShorteningController = {
   getUrl: (req: Request, res: Response) => {
@@ -14,12 +15,20 @@ export const UrlShorteningController = {
   },
   shortenUrl: (req: Request, res: Response) => {
     try {
-      const shortUrl = generateShortUrl('hello');
+      const result = urlSchema.safeParse(req.body);
+
+      if (!result.success) {
+        return res.status(400).json({ error: result.error.errors });
+      }
+
+      const { url } = result.data;
+
+      const shortUrl = generateShortUrl(url);
       res.json({
         shortUrl,
       });
     } catch (error) {
-      res.status(500).json({ error: 'Server error' });
+      res.status(500).json({ error });
     }
   },
   popularDomains: (req: Request, res: Response) => {

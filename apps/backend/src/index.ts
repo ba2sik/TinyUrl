@@ -5,12 +5,15 @@ import { router } from './routes/UrlShorteningRoutes';
 dotenv.config();
 
 const app: Express = express();
-
 const port = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Server is up');
 });
+
 app.use('/api', router);
 
 app.listen(port, () => {
